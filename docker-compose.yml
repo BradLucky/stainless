@@ -1,49 +1,51 @@
 version: "3.7"
+
+networks:
+  backend:
+
 services:
 
   web:
     build: .
     ports:
       - "5000:5000"
-#    depends_on:
-#      - db
-#    environment:
-#      MYSQL_DATABASE_URI: mysql+pymysql://sat:123@172.17.0.1:3306/satellites
+    networks:
+      - backend
+    depends_on:
+      - db
+    environment:
+      SQLALCHEMY_DATABASE_URI: postgresql://stainless:abc123@db/stainless
     volumes:
       - .:/app
 
 # TODO wait for DB container before starting Flask
 
-#  db:
-#    image: mysql:8.0
-#    hostname: mysql
-#    command: --default-authentication-plugin=mysql_native_password
-#    restart: always
-#    volumes:
-#      - ./data:/var/lib/mysql
-#    ports:
-#      - "3306:3306"
-#    networks:
-#      - backend
-#    environment:
-#      MYSQL_ROOT_HOST: 172.17.0.1
-#      MYSQL_ROOT_PASSWORD: sat4321
-#      MYSQL_USER: sat
-#      MYSQL_PASSWORD: 123
-#      MYSQL_DATABASE: satellites
-#
-#  adminer:
-#    image: adminer
-#    hostname: adminer
-#    restart: always
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - backend
-#    environment:
-#      ADMINER_DEFAULT_SERVER: mysql
-#      ADMINER_DESIGN: 'pappu687'
+  db:
+    image: postgres:12.2-alpine
+    hostname: postgres
+    depends_on:
+      - adminer
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data:cached
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+    environment:
+      POSTGRES_USER: stainless
+      POSTGRES_PASSWORD: abc123
+      POSTGRES_DB: stainless
+    tty: true
+    stdin_open: false
 
-#networks:
-#  frontend:
-#  backend:
+  adminer:
+    image: adminer
+    hostname: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    environment:
+      ADMINER_DESIGN: 'galkaev'
