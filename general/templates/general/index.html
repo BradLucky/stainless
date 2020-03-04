@@ -5,7 +5,11 @@
 </head>
 <body>
   <div class="container">
+    {% if user %}
+    Welcome, <a link="mailto:{{user.email}}">{{user.first_name}} {{user.last_name}}</a>!
+    {% else %}
     Welcome Home!
+    {% endif %}
   </div>
 </body>
 </html>
