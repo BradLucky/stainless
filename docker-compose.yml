@@ -18,8 +18,6 @@ services:
     volumes:
       - .:/app
 
-# TODO wait for DB container before starting Flask
-
   db:
     image: postgres:12.2-alpine
     hostname: postgres
