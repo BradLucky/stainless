@@ -25,7 +25,7 @@ services:
       - adminer
     restart: always
     volumes:
-      - ./pgdata:/var/lib/postgresql/data:cached
+      - ./data:/var/lib/postgresql/data:cached
     ports:
       - "5432:5432"
     networks:
