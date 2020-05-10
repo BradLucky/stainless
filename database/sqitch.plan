@@ -3,3 +3,4 @@
 %uri=https://github.com/BradLucky/stainless
 
 appschema 2020-05-02T11:06:23Z Brad Luczywo <bradlucky@cheezer.com> # Add schema for all stainless objects.
+users [appschema] 2020-05-10T14:39:05Z Brad Luczywo <bradlucky@cheezer.com> # Create a table to track users
