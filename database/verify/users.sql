@@ -2,7 +2,7 @@
 
 BEGIN;
 
-SELECT id, name, password
+SELECT id, first_name, last_name, password
 FROM stainless.users
 WHERE FALSE;
 
