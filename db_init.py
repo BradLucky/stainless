@@ -22,7 +22,7 @@ user = User(
     email='afreestain@example.com',
     first_name='Amber',
     last_name='Freestain',
-    birthdate=datetime(1980, 5, 6)
+    password='abc123',
 )
 
 db_session.add(user)
